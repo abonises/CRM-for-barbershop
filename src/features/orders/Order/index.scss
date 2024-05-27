@@ -1,0 +1,43 @@
+.order-element {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .order {
+    display: grid;
+    grid-template-columns: 0.1fr 1fr 1fr 1fr 2fr .2fr;
+    gap: 100px;
+    text-align: center;
+    align-items: center;
+    padding: 20px;
+    background: #f4f3f3;
+    justify-content: center;
+    border-radius: 15px;
+
+    .order-name {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .order-time {
+      width: 70px;
+      font-size: 11px;
+    }
+
+    button {
+      display: inline-block;
+      padding: 0;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      background: transparent;
+    }
+
+    button:hover {
+      color: #898282;
+    }
+  }
+
+}

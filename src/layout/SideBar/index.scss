@@ -1,0 +1,87 @@
+.side-bar {
+  width: 250px;
+  flex-shrink: 0;
+  height: 100vh;
+  padding: 16px 0;
+  display: flex;
+  gap: 20px;
+
+  header {
+    width: 100%;
+    background: var(--primary-color);
+    flex-shrink: 0;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    justify-content: space-between;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    gap: 40px;
+
+    .icons {
+      font-size: 1.62rem;
+      transition: 0.3s ease-in-out;
+    }
+
+    .logo-main-page {
+      .nav-link {
+        color: #2a2728;
+        align-self: center;
+        font-size: 1.3rem;
+        display: flex;
+        font-weight: 700;
+        align-items: center;
+        line-height: 1.2;
+        transition: 0.3s all ease-in-out;
+
+        .icons {
+          font-size: 4.2rem;
+        }
+      }
+
+      .nav-link:hover {
+        color: rgba(255, 255, 255, 0.45);
+      }
+    }
+
+    .tabs {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px;
+        font-size: 1.12rem;
+      }
+
+      .nav-link:hover {
+        background: rgba(255, 255, 255, 0.11);
+        border-radius: 10px;
+      }
+
+      .nav-link.active {
+        background: rgba(255, 255, 255, 0.11);
+        border-radius: 10px;
+      }
+
+      .nav-link.active .icons {
+        color: #212;
+      }
+    }
+
+
+  }
+}
+
+.main-outlet {
+  display: flex;
+  flex-direction: column;
+}

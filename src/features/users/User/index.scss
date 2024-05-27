@@ -1,0 +1,64 @@
+.person-element {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .person {
+    display: grid;
+    grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr .2fr;
+    gap: 100px;
+    text-align: center;
+    align-items: center;
+    padding: 20px;
+    background: #f4f3f3;
+    justify-content: center;
+    border-radius: 15px;
+
+    .person-name {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .person-img {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+
+      .icon-rating {
+        color: #f4b109;
+        font-size: 1.2rem;
+      }
+
+    }
+
+    .roles {
+      display: flex;
+      flex-direction: column;
+      max-width: 110px;
+      line-height: 1.1;
+    }
+
+    button {
+      display: inline-block;
+      padding: 0;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      background: transparent;
+    }
+
+    button:hover {
+      color: #898282;
+    }
+  }
+
+}

@@ -1,0 +1,89 @@
+.main-page {
+  margin-top: 30px;
+  background: #eae8e8;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+
+  .header-box {
+    h1 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--header-color);
+  }
+}
+
+  .statistic {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 20px 20px 20px 0;
+    gap: 40px;
+
+    .tab-stats {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 15px 30px;
+      background: #f8f6f6;
+      gap: 30px;
+      border-radius: 15px;
+
+      h1 {
+        display: flex;
+        align-items: center;
+        font-size: 1.3rem;
+        gap: 10px;
+        color: var(--header-color);
+        text-align: center;
+    }
+
+      .icon-stat-tab {
+        font-size: 1.4rem;
+        color: #929191;
+    }
+  }
+
+    .top-barber-per-month {
+
+      .barber-rating {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+
+        .barber-box {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+          justify-content: center;
+
+          img {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+      }
+
+        .rating {
+          display: flex;
+          gap: 5px;
+
+          .icon-rating {
+            color: #f4f309;
+        }
+      }
+    }
+  }
+
+    .orders-count, .reviews-count, .all-clients {
+
+      span {
+        font-size: 2rem;
+        font-weight: 500;
+    }
+  }
+}
+}
