@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react"
+import React, {useState, useEffect} from "react"
 import {useUpdateUserMutation, useDeleteUserMutation} from "../usersApiSlice"
 import {useNavigate} from "react-router-dom"
 import {ROLES} from "../../../config/roles"
@@ -8,11 +8,12 @@ import {FaTrashAlt} from "react-icons/fa";
 import {FaRegSave} from "react-icons/fa";
 import './index.scss'
 import cn from 'classnames'
+import {CustomError} from "../../../models/models.ts";
 
 
 const USER_REGEX = /^[A-z]{3,20}$/
 const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/
-const PHONE_REGEX = /^\d{12}$/
+const PHONE_REGEX = /^380\d{9}$/;
 
 type Props = {
     user: User
@@ -69,11 +70,11 @@ const Index = ({user}: Props) => {
 
     }, [isSuccess, isDelSuccess, navigate])
 
-    const onUsernameChanged = e => setUsername(e.target.value)
-    const onPasswordChanged = e => setPassword(e.target.value)
-    const onPhoneChanged = e => setPhone(e.target.value)
+    const onUsernameChanged = (e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)
+    const onPasswordChanged = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)
+    const onPhoneChanged = (e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)
 
-    const onRolesChanged = e => {
+    const onRolesChanged = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const values = Array.from(
             e.target.selectedOptions,
             (option) => option.value
@@ -81,13 +82,13 @@ const Index = ({user}: Props) => {
         setRoles(values)
     }
 
-    const onRatingChanged = e => {
+    const onRatingChanged = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setRating(e.target.value)
     }
 
     const onActiveChanged = () => setActive(prev => !prev)
 
-    const onSaveUserClicked = async (e) => {
+    const onSaveUserClicked = async () => {
         if (password) {
             await updateUser({id: user.id, username, password, roles, active, rating, phone})
         } else {
@@ -127,12 +128,15 @@ const Index = ({user}: Props) => {
     }
 
     const errClass = (isError || isDelError) ? "error" : ''
-    const validUserClass = !validUsername ? 'form__input--incomplete' : ''
-    const validPwdClass = password && !validPassword ? 'form__input--incomplete' : ''
-    const validRolesClass = !(roles.length) ? 'form__input--incomplete' : ''
-    const validPhoneClass = !validPhone ? 'form__input--incomplete' : ''
+    const validUserClass = !validUsername ? 'form__error' : ''
+    const validPwdClass = password && !validPassword ? 'form__error' : ''
+    const validRolesClass = !(roles.length) ? 'form__error' : ''
+    const validPhoneClass = !validPhone ? 'form__error' : ''
 
-    const errContent = (error?.data?.message || delerror?.data?.message) ?? ''
+    const errContent = (
+        (error as CustomError)?.data?.message ||
+        (delerror as CustomError)?.data?.message || ''
+    );
 
     const content = (
         <>
@@ -161,7 +165,7 @@ const Index = ({user}: Props) => {
                         <label htmlFor="username">
                             Username: <span> [3-20 letters]</span></label>
                         <input
-                            className={`form__input ${validUserClass}`}
+                            className={`${validUserClass}`}
                             id="username"
                             name="username"
                             type="text"
@@ -174,7 +178,7 @@ const Index = ({user}: Props) => {
                             Password: <span>[empty = no change]</span> <span
                             className="nowrap">[4-12 chars incl. !@#$%]</span></label>
                         <input
-                            className={`form__input ${validPwdClass}`}
+                            className={`${validPwdClass}`}
                             id="password"
                             name="password"
                             type="password"
@@ -184,10 +188,10 @@ const Index = ({user}: Props) => {
 
                         <label htmlFor="phone-number">
                             Phone: <span
-                            className="nowrap">[12 digits, Format: 380000000000]</span></label>
+                            className="nowrap">[12 digits, Format: +380]</span></label>
                         <input
                             required
-                            className={`form__input ${validPhoneClass}`}
+                            className={`${validPhoneClass}`}
                             id="phone"
                             name="phone"
                             type="tel"
@@ -214,7 +218,7 @@ const Index = ({user}: Props) => {
                                 ASSIGNED ROLES:</label>
                             <div className={'select-container'}>
                                 <select
-                                    className={`form__select ${validRolesClass}`}
+                                    className={`${validRolesClass}`}
                                     id="roles"
                                     name="roles"
                                     multiple={true}
@@ -229,7 +233,7 @@ const Index = ({user}: Props) => {
                             <label htmlFor="rating">
                                 ASSIGNED RATING:</label>
                             <select
-                                className={`form__select ${validRolesClass}`}
+                                className={`${validRolesClass}`}
                                 id="rating"
                                 name="rating"
                                 size={5}

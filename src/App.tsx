@@ -7,6 +7,8 @@ import OrdersList from "./features/orders/OrdersList";
 import EditUser from "./features/users/EditUser";
 import Prefetch from "./features/auth/Prefetch";
 import NewUserForm from "./features/users/NewUserForm";
+import EditOrder from "./features/orders/EditOrder";
+import NewOrder from "./features/orders/NewOrder";
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
 
                 <Route path="orders">
                     <Route index element={<OrdersList />} />
+                    <Route path=":id" element={<EditOrder />} />
+                    <Route path="new" element={<NewOrder/>}/>
                 </Route>
 
                 <Route path="reviews">

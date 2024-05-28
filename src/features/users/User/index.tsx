@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { selectUserById } from '../usersApiSlice.ts'
 import {GoStarFill} from "react-icons/go"
 import { MdEdit } from "react-icons/md";
+import {RootState} from "../../../app/store.ts";
 
 type Props = {
     userId: string
@@ -11,7 +12,7 @@ type Props = {
 
 const Index = ({ userId }: Props) => {
 
-    const user = useSelector(state => selectUserById(state, userId))
+    const user = useSelector((state: RootState) => selectUserById(state, userId))
 
     const navigate = useNavigate()
 

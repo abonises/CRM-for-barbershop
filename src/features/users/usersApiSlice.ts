@@ -1,28 +1,29 @@
 import {
     createSelector,
-    createEntityAdapter,
+    createEntityAdapter, EntityState, EntityAdapter
 } from "@reduxjs/toolkit";
-import { apiSlice } from "../../app/api/apiSlice"
+import { apiSlice } from "../../app/api/apiSlice";
+import { User } from '../../models/models'
+import { RootState } from '../../app/store'
 
-const usersAdapter = createEntityAdapter({})
+const usersAdapter: EntityAdapter<User, string> = createEntityAdapter<User>({})
 
 const initialState = usersAdapter.getInitialState()
 
 export const usersApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
-        getUsers: builder.query({
+        getUsers: builder.query<EntityState<User, string>, void>({
             query: () => '/users',
-            validateStatus: (response, result) => {
-                return response.status === 200 && !result.isError
-            },
-            transformResponse: responseData => {
+            transformResponse: (responseData: User[]) => {
                 const loadedUsers = responseData.map(user => {
                     user.id = user._id
                     return user
                 });
                 return usersAdapter.setAll(initialState, loadedUsers)
             },
-            providesTags: (result, error, arg) => {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-expect-error
+            providesTags: (result) => {
                 if (result?.ids) {
                     return [
                         { type: 'User', id: 'LIST' },
@@ -51,17 +52,17 @@ export const usersApiSlice = apiSlice.injectEndpoints({
                     ...initialUserData,
                 }
             }),
-            invalidatesTags: (result, error, arg) => [
+            invalidatesTags: (_result, _, arg) => [
                 { type: 'User', id: arg.id }
             ]
         }),
         deleteUser: builder.mutation({
             query: ({ id }) => ({
-                url: `/users`,
+                url: '/users',
                 method: 'DELETE',
                 body: { id }
             }),
-            invalidatesTags: (result, error, arg) => [
+            invalidatesTags: (_result,  _, arg) => [
                 { type: 'User', id: arg.id }
             ]
         }),
@@ -75,19 +76,15 @@ export const {
     useDeleteUserMutation,
 } = usersApiSlice
 
-// returns the query result object
 export const selectUsersResult = usersApiSlice.endpoints.getUsers.select()
 
-// creates memoized selector
 const selectUsersData = createSelector(
     selectUsersResult,
-    usersResult => usersResult.data // normalized state object with ids & entities
+    usersResult => usersResult?.data ?? initialState
 )
 
-//getSelectors creates these selectors and we rename them with aliases using destructuring
 export const {
     selectAll: selectAllUsers,
     selectById: selectUserById,
     selectIds: selectUserIds
-    // Pass in a selector that returns the users slice of state
-} = usersAdapter.getSelectors(state => selectUsersData(state) ?? initialState)
+} = usersAdapter.getSelectors((state: RootState) => selectUsersData(state))

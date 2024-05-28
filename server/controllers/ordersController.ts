@@ -35,7 +35,13 @@ const createNewOrder = async (req: Request, res: Response) => {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
-    // Create and store the new user 
+    const duplicateTime = await Order.findOne({ time }).collation({locale: 'en', strength: 2}).lean().exec()
+
+    if (duplicateTime) {
+        return res.status(409).json({ message: 'Duplicate time' })
+    }
+
+    // Create and store the new user
     const order = await Order.create({ user, name, nameBarber, surname, phone, time })
 
     if (order) { // Created

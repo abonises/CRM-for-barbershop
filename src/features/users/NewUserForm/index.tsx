@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react"
+import React, {useState, useEffect} from "react"
 import { useAddNewUserMutation } from "../usersApiSlice"
 import {useNavigate} from "react-router-dom"
 import {ROLES} from "../../../config/roles"
@@ -6,6 +6,7 @@ import {RATINGS} from "../../../config/ratings"
 import {FaRegSave} from "react-icons/fa";
 import './index.scss'
 import cn from 'classnames'
+import {CustomError} from "../../../models/models.ts";
 
 
 const USER_REGEX = /^[A-z]{3,20}$/
@@ -57,11 +58,11 @@ const Index = () => {
 
     }, [isSuccess, navigate])
 
-    const onUsernameChanged = e => setUsername(e.target.value)
-    const onPasswordChanged = e => setPassword(e.target.value)
-    const onPhoneChanged = e => setPhone(e.target.value)
+    const onUsernameChanged = (e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)
+    const onPasswordChanged = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)
+    const onPhoneChanged = (e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)
 
-    const onRolesChanged = e => {
+    const onRolesChanged = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const values = Array.from(
             e.target.selectedOptions,
             (option) => option.value
@@ -69,13 +70,13 @@ const Index = () => {
         setRoles(values)
     }
 
-    const onRatingChanged = e => {
+    const onRatingChanged = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setRating(e.target.value)
     }
 
     const canSave = [roles.length, validPhone, validUsername, validPassword].every(Boolean) && !isLoading
 
-    const onSaveUserClicked = async (e) => {
+    const onSaveUserClicked = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         if (canSave) {
             await addNewUser({ username, password, roles, rating, phone })
@@ -111,7 +112,7 @@ const Index = () => {
 
     const content = (
         <>
-            <p className={errClass}>{error?.data?.message}</p>
+            <p className={errClass}>{(error as CustomError)?.data?.message}</p>
 
             <div className='user-new-page'>
                 <form onSubmit={e => e.preventDefault()}>

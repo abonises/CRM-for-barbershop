@@ -3,6 +3,7 @@ import './index.scss'
 import { useSelector } from 'react-redux'
 import { selectOrderById } from '../ordersApiSlice'
 import {MdEdit} from "react-icons/md";
+import {RootState} from "../../../app/store.ts";
 
 type Props = {
     OrderId: string
@@ -10,13 +11,13 @@ type Props = {
 
 const Index = ({ OrderId }: Props) => {
 
-    const order = useSelector(state => selectOrderById(state, OrderId))
+    const order = useSelector((state: RootState) => selectOrderById(state, OrderId))
 
     const navigate = useNavigate()
 
     if (order) {
 
-        const handleEdit = () => navigate(`/dash/orders/${OrderId}`)
+        const handleEdit = () => navigate(`/orders/${OrderId}`)
 
         return (
             <li key={order.id} className="order-element">

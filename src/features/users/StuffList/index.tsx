@@ -3,6 +3,7 @@ import { useGetUsersQuery } from "../usersApiSlice.ts"
 import User from "../User";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import {useNavigate} from "react-router-dom";
+import {CustomError} from "../../../models/models.ts";
 
 const Index = () => {
 
@@ -16,7 +17,7 @@ const Index = () => {
 
     const navigate = useNavigate()
 
-    const handleNewUser = (e) => {
+    const handleNewUser = () => {
         navigate('/stuff/new')
     }
 
@@ -25,7 +26,7 @@ const Index = () => {
     if(isLoading) content = <p>Loading...</p>
 
     if (isError) {
-        content = <p className="errmsg">Error</p>
+        content = <p className="errmsg">{(error as CustomError)?.data?.message}</p>
     }
 
     if (isSuccess) {

@@ -21,9 +21,19 @@ export type User = {
 
 
 export type Order = {
-    id: number,
+    ids: string[]
+    _id: string;
+    id: string,
+    user: string,
     name: string,
+    nameBarber: string,
+    surname: string,
+    phone: string,
     time: string,
-    date: string,
-    phone_number: string
+}
+
+export type CustomError = {
+    data?: {
+        message?: string;
+    };
 }

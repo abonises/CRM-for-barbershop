@@ -7,10 +7,6 @@ import { IoPeopleSharp } from "react-icons/io5";
 
 const Index = () => {
 
-
-
-
-
     return (
         <section className='main-page'>
             <div className='header-box'>

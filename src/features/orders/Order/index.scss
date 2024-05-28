@@ -13,15 +13,17 @@
     background: #f4f3f3;
     justify-content: center;
     border-radius: 15px;
+    overflow: hidden;
 
-    .order-name {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .order-name,
+    .order-time,
+    .order-phone {
+      width: 90px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .order-time {
-      width: 70px;
       font-size: 11px;
     }
 
