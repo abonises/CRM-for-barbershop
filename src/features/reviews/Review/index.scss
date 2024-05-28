@@ -1,0 +1,58 @@
+.review-element {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .review {
+    display: grid;
+    grid-template-columns: 0.1fr 1fr 1fr 1fr .2fr;
+    gap: 100px;
+    text-align: center;
+    align-items: center;
+    padding: 20px;
+    background: #f4f3f3;
+    justify-content: center;
+    border-radius: 15px;
+    overflow: hidden;
+
+    .rating {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+
+      .icon-rating {
+        color: #f4b109;
+        font-size: 1.2rem;
+      }
+
+    }
+
+    .review-name,
+    .review-time,
+    .review-phone {
+      width: 150px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .review-time {
+      font-size: 11px;
+    }
+
+    button {
+      display: inline-block;
+      padding: 0;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      background: transparent;
+    }
+
+    button:hover {
+      color: #898282;
+    }
+  }
+
+}

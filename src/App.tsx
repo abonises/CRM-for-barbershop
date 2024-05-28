@@ -9,6 +9,7 @@ import Prefetch from "./features/auth/Prefetch";
 import NewUserForm from "./features/users/NewUserForm";
 import EditOrder from "./features/orders/EditOrder";
 import NewOrder from "./features/orders/NewOrder";
+import ReviewsList from "./features/reviews/ReviewsList";
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
                 </Route>
 
                 <Route path="reviews">
-                    <Route index element={<MainPage />} />
+                    <Route index element={<ReviewsList />} />
                 </Route>
             </Route>
 

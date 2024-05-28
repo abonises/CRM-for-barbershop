@@ -32,6 +32,17 @@ export type Order = {
     time: string,
 }
 
+export type Review = {
+    ids: string[]
+    _id: string;
+    id: string,
+    user: string,
+    nameBarber: string,
+    title: string,
+    text: string,
+    rating: string
+}
+
 export type CustomError = {
     data?: {
         message?: string;

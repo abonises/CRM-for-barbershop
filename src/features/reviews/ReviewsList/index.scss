@@ -1,0 +1,61 @@
+.reviews-page {
+  background: #eae8e8;
+  border-radius: 15px;
+  display: flex;
+  margin-top: 30px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  gap: 20px;
+
+  .header-box {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+
+    h1 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--header-color);
+    }
+
+    button {
+      position: absolute;
+      top: -0;
+      right: 0;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      background: transparent;
+
+    }
+  }
+
+  .reviews-list-box {
+    display: flex;
+    flex-direction: column;
+
+
+    .properties-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr .2fr ;
+      font-size: 0.9rem;
+      color: #868484;
+      font-weight: 300;
+      gap: 100px;
+      text-align: center;
+      align-items: center;
+      padding: 15px;
+    }
+
+    .reviews-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+}

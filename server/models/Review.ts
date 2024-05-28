@@ -11,6 +11,10 @@ const reviewSchema = new mongoose.Schema(
             type: String,
             required: true
         },
+        nameBarber: {
+            type: String,
+            required: true
+        },
         text: {
             type: String,
             required: true

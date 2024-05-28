@@ -71,6 +71,7 @@ const Index = ({ users }: Props) => {
         if (canSave) {
             await addNewOrder({ user: userId, name, nameBarber, surname, phone, time})
         }
+
     }
 
     const options = users.map(user => {

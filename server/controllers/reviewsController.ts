@@ -28,15 +28,15 @@ const getAllReviews = async (_req: Request, res: Response) => {
 // @route POST /reviews
 // @access Private
 const createNewReview = async (req: Request, res: Response) => {
-    const { user, title, text, rating } = req.body
+    const { user, title, text, rating, nameBarber } = req.body
 
     // Confirm data
-    if (!user || !title || !text || !rating) {
+    if (!user || !title || !text || !rating || !nameBarber) {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
     // Create and store the new user
-    const review = await Review.create({ user, title, text, rating })
+    const review = await Review.create({ user, title, text, rating, nameBarber })
 
     if (review) { // Created
         return res.status(201).json({ message: 'New review created' })
@@ -50,10 +50,10 @@ const createNewReview = async (req: Request, res: Response) => {
 // @route PATCH /reviews
 // @access Private
 const updateReview = async (req: Request, res: Response) => {
-    const { id, user, title, text, rating } = req.body
+    const { id, user, title, text, rating, nameBarber } = req.body
 
     // Confirm data
-    if (!id || !user || !title || !text || !rating) {
+    if (!id || !user || !title || !text || !rating || !nameBarber) {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
@@ -68,6 +68,7 @@ const updateReview = async (req: Request, res: Response) => {
     review.title = title
     review.text = text
     review.rating = rating
+    review.nameBarber = nameBarber
 
     const updatedReview = await review.save()
 
