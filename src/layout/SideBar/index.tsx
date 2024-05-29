@@ -25,7 +25,7 @@ export default function Navigator() {
     }] = useSendLogoutMutation()
 
     useEffect(() => {
-        if (isSuccess) navigate('/')
+        if (isSuccess) navigate('/login')
     }, [isSuccess])
 
     if (isLoading) return <p>Logging Out...</p>

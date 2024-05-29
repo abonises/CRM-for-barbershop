@@ -1,12 +1,15 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import {BaseQueryFn, createApi, FetchArgs, fetchBaseQuery, FetchBaseQueryError} from '@reduxjs/toolkit/query/react'
 import { setCredentials } from '../../features/auth/authSlice'
+import {RootState} from "../store.ts";
 
 const baseQuery = fetchBaseQuery({
     baseUrl: 'http://localhost:3500',
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
-        const token = getState().auth.token
-        console.log(token)
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore
+        const token = (getState() as RootState).auth.token;
+
         if (token) {
             headers.set("authorization", `Bearer ${token}`)
         }
@@ -14,10 +17,8 @@ const baseQuery = fetchBaseQuery({
     }
 })
 
-const baseQueryWithReauth = async (args, api, extraOptions) => {
-    // console.log(args) // request url, method, body
-    // console.log(api) // signal, dispatch, getState()
-    // console.log(extraOptions) //custom like {shout: true}
+const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown,FetchBaseQueryError
+> = async (args, api, extraOptions) => {
 
     let result = await baseQuery(args, api, extraOptions)
 
@@ -36,10 +37,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
             // retry original query with new access token
             result = await baseQuery(args, api, extraOptions)
         } else {
-
-            if (refreshResult?.error?.status === 403) {
-                refreshResult.error.data.message = "Your login has expired. "
-            }
             return refreshResult
         }
     }
@@ -49,6 +46,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
 export const apiSlice = createApi({
     baseQuery: baseQueryWithReauth,
-    tagTypes: ['Note', 'User'],
-    endpoints: builder => ({})
+    tagTypes: ['Order', 'User', 'Review'],
+    endpoints: _builder => ({})
 })
