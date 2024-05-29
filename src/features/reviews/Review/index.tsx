@@ -12,9 +12,12 @@ type Props = {
 
 const Index = ({ ReviewId }: Props) => {
 
+
     const review = useSelector((state: RootState) => selectReviewById(state, ReviewId))
 
     const navigate = useNavigate()
+
+
 
     if (review) {
 
@@ -23,9 +26,16 @@ const Index = ({ ReviewId }: Props) => {
         return (
             <li key={review.id} className="review-element">
                 <div className='review'>
-                    <span className='review-barber review-name'>{review.nameBarber}</span>
-                    <span className='review-name'>{review.title}</span>
-                    <span className='review-name'>{review.text}</span>
+                    <span className='review-barber'>{review.nameBarber}</span>
+                    <span className='review-title'>{review.title}</span>
+                    <div className={'review-text'}>
+                        <details className={'review-text'}>
+                            <summary>
+                                Text
+                            </summary>
+                            {review.text}
+                        </details>
+                    </div>
                     <div className='rating'>
                         <p>{review.rating}</p>
                         <GoStarFill className='icon-rating'/>

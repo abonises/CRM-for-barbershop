@@ -42,7 +42,6 @@ const Index = ({ order, users }: Props) => {
     const [validPhone, setValidPhone] = useState(false);
 
     useEffect(() => {
-
         if (isSuccess || isDelSuccess) {
             setName('')
             setSurname('')
@@ -61,8 +60,11 @@ const Index = ({ order, users }: Props) => {
     const onNameChanged = (e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)
     const onSurnameChanged = (e: React.ChangeEvent<HTMLInputElement>) => setSurname(e.target.value)
     const onUserIdChanged = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setUserId(e.target.value)
-        setNameBarber(e.target.value)
+        const selectedUserId = e.target.value;
+        setUserId(selectedUserId);
+
+        const selectedUser = users.find(user => user.id === selectedUserId);
+        setNameBarber(selectedUser ? selectedUser.username : '');
     }
     const onPhoneChanged = (e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)
     const onTimeChanged = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -131,6 +131,7 @@ const Index = ({user}: Props) => {
     const validUserClass = !validUsername ? 'form__error' : ''
     const validPwdClass = password && !validPassword ? 'form__error' : ''
     const validRolesClass = !(roles.length) ? 'form__error' : ''
+    const validRatingClass = !rating ? 'form__error' : ''
     const validPhoneClass = !validPhone ? 'form__error' : ''
 
     const errContent = (
@@ -233,7 +234,7 @@ const Index = ({user}: Props) => {
                             <label htmlFor="rating">
                                 ASSIGNED RATING:</label>
                             <select
-                                className={`${validRolesClass}`}
+                                className={`${validRatingClass}`}
                                 id="rating"
                                 name="rating"
                                 size={5}

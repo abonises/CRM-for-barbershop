@@ -11,7 +11,6 @@
     align-items: center;
     padding: 20px;
     background: #f4f3f3;
-    justify-content: center;
     border-radius: 15px;
     overflow: hidden;
 
@@ -28,12 +27,44 @@
 
     }
 
-    .review-name,
+    .review-barber,
+    .review-title,
+    .review-text,
     .review-time,
     .review-phone {
-      width: 150px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      width: 160px;
+      height: 100%;
+    }
+
+    .review-text{
+      cursor: pointer;
+    }
+
+    details {
+      position: relative;
+      width: 300px;
+      cursor: pointer;
+    }
+
+    summary {
+      list-style: none;
+    }
+
+    summary::marker {
+      display: none;
+    }
+
+    summary::before {
+      content: "\25B6";
+      font-size: 0.8em;
+      padding-right: 5px;
+      transition: transform 0.3s ease;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    details[open] summary::before {
+      transform: rotate(90deg);
     }
 
     .review-time {

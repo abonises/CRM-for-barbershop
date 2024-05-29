@@ -12,7 +12,11 @@ const Index = () => {
         isSuccess,
         isError,
         error
-    } = useGetOrdersQuery()
+    } = useGetOrdersQuery(undefined, {
+        pollingInterval: 15000,
+        refetchOnFocus: true,
+        refetchOnMountOrArgChange: true
+    })
 
     const navigate = useNavigate()
 

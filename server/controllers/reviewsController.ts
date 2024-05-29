@@ -66,9 +66,9 @@ const updateReview = async (req: Request, res: Response) => {
 
     review.user = user
     review.title = title
+    review.nameBarber = nameBarber
     review.text = text
     review.rating = rating
-    review.nameBarber = nameBarber
 
     const updatedReview = await review.save()
 

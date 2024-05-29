@@ -10,6 +10,7 @@ import NewUserForm from "./features/users/NewUserForm";
 import EditOrder from "./features/orders/EditOrder";
 import NewOrder from "./features/orders/NewOrder";
 import ReviewsList from "./features/reviews/ReviewsList";
+import EditReview from "./features/reviews/EditReview";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
 
                 <Route path="reviews">
                     <Route index element={<ReviewsList />} />
+                    <Route path=":id" element={<EditReview />} />
                 </Route>
             </Route>
 

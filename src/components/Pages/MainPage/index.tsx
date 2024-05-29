@@ -6,6 +6,7 @@ import { IoPeopleSharp } from "react-icons/io5";
 import {useGetOrdersQuery} from "../../../features/orders/ordersApiSlice.ts";
 import {useEffect, useState} from "react";
 import {useGetUsersQuery} from "../../../features/users/usersApiSlice.ts";
+import {useGetReviewsQuery} from "../../../features/reviews/reviewsApiSlice.ts";
 
 const Index = () => {
 
@@ -32,8 +33,13 @@ const Index = () => {
         data: users,
     } = useGetUsersQuery()
 
+    const {
+        data: reviews,
+    } = useGetReviewsQuery()
+
 
     const stuffCount = users && users.ids ? users.ids.length : 0;
+    const reviewsCount = reviews && reviews.ids ? reviews.ids.length : 0;
     const ordersCount = orders && orders.ids ? orders.ids.length : 0
 
     return (
@@ -52,7 +58,7 @@ const Index = () => {
                 </div>
                 <div className="tab-stats reviews-count">
                     <h1><MdOutlineReviews className='icon-stat-tab'/>Reviews Count</h1>
-                    <span>111</span>
+                    <span>{reviewsCount}</span>
                 </div>
                 <div className="tab-stats all-clients">
                     <h1><IoPeopleSharp className='icon-stat-tab'/>Time Now</h1>

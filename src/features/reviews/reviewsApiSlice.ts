@@ -32,6 +32,18 @@ export const reviewsApiSlice = apiSlice.injectEndpoints({
                 } else return [{ type: 'Review', id: 'LIST' }]
             }
         }),
+        updateReview: builder.mutation({
+            query: initialReview => ({
+                url: '/reviews',
+                method: 'PATCH',
+                body: {
+                    ...initialReview,
+                }
+            }),
+            invalidatesTags: (_result, _, arg) => [
+                { type: 'Review', id: arg.id }
+            ]
+        }),
         deleteReview: builder.mutation({
             query: ({ id }) => ({
                 url: `/reviews`,
@@ -48,6 +60,7 @@ export const reviewsApiSlice = apiSlice.injectEndpoints({
 
 export const {
     useGetReviewsQuery,
+    useUpdateReviewMutation,
     useDeleteReviewMutation,
 } = reviewsApiSlice
 

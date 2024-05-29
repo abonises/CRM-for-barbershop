@@ -1,8 +1,6 @@
 import './index.scss'
 import {useGetReviewsQuery} from "../reviewsApiSlice.ts";
 import {CustomError} from "../../../models/models.ts";
-import { RiStickyNoteAddLine } from "react-icons/ri";
-import {useNavigate} from "react-router-dom";
 import Review from "../Review";
 
 const Index = () => {
@@ -12,13 +10,11 @@ const Index = () => {
         isSuccess,
         isError,
         error
-    } = useGetReviewsQuery()
-
-    const navigate = useNavigate()
-
-    const handleNewReview = () => {
-        navigate('/reviews/new')
-    }
+    } = useGetReviewsQuery(undefined, {
+        pollingInterval: 15000,
+        refetchOnFocus: true,
+        refetchOnMountOrArgChange: true
+    })
 
     let content
 
@@ -38,9 +34,6 @@ const Index = () => {
         content = (<div className='reviews-page'>
             <div className='header-box'>
                 <h1>Reviews</h1>
-                <button onClick={handleNewReview}>
-                    <RiStickyNoteAddLine/>
-                </button>
             </div>
             <div className='reviews-list-box'>
                 <div className='properties-list'>
