@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config()
 require('express-async-errors')
 import express, { Express, Request, Response } from "express";
@@ -14,6 +15,7 @@ import rootRoutes from './routes/root';
 import userRoutes from './routes/userRoutes';
 import orderRoutes from './routes/orderRoutes';
 import reviewRoutes from "./routes/reviewRoutes";
+import authRoutes from "./routes/authRoutes";
 const PORT = process.env.PORT || 3500;
 
 console.log(process.env.NODE_ENV)
@@ -32,6 +34,7 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.use('/', rootRoutes)
 app.use('/users', userRoutes)
+app.use('/auth', authRoutes)
 app.use('/orders', orderRoutes)
 app.use('/reviews', reviewRoutes)
 

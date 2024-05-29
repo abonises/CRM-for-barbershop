@@ -1,0 +1,70 @@
+.login-page {
+  background: #eae8e8;
+  border-radius: 15px;
+  display: flex;
+  margin-top: 30px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 25px;
+  gap: 20px;
+
+  header {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+
+    h1 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--header-color);
+      align-self: center;
+    }
+  }
+
+  .error {
+    color: red;
+  }
+
+  .login {
+
+    form {
+      width: 50%;
+
+      .login-box {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        input {
+          padding: 5px;
+          border-radius: 10px;
+          outline: none;
+          border: 0.5px var(--header-color) solid;
+        }
+      }
+
+      button {;
+        font-size: 1rem;
+        display: flex;
+        padding: 5px 10px;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
+        outline: none;
+        border: none;
+        background: var(--primary-color);
+        border-radius: 20px;
+        cursor: pointer;
+        flex-grow: 0;
+        margin-top: 20px;
+
+      }
+    }
+  }
+
+  .link-to-home {
+    color: var(--header-color);
+    font-weight: 500;
+  }
+}
