@@ -60,6 +60,20 @@
         margin-top: 20px;
 
       }
+
+      .persist-box {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+
+        label {
+          font-weight: 500;
+        }
+
+        .persist-checkbox {
+          margin-right: 10px;
+        }
+      }
     }
   }
 

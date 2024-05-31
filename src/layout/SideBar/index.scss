@@ -77,7 +77,25 @@
       }
     }
 
+    .logout-button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px;
+      font-size: 1.12rem;
+      border: none;
+      background: transparent;
+      outline: none;
+      color: white;
+      cursor: pointer;
+      align-self: center;
+    }
 
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
   }
 }
 

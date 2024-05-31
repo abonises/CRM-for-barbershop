@@ -105,16 +105,18 @@ const Index = () => {
                     </div>
                     <button>Sign In</button>
 
-                    <label htmlFor="persist" className="form__persist">
-                        <input
-                            type="checkbox"
-                            className="form__checkbox"
-                            id="persist"
-                            onChange={handleToggle}
-                            checked={persist}
-                        />
-                        Trust This Device
-                    </label>
+                    <div className="persist-box">
+                        <label htmlFor="persist">
+                            <input
+                                type="checkbox"
+                                className="persist-checkbox"
+                                id="persist"
+                                onChange={handleToggle}
+                                checked={persist}
+                            />
+                            Trust This Device
+                        </label>
+                    </div>
                 </form>
             </main>
             <footer>

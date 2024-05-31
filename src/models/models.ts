@@ -22,6 +22,7 @@ export type User = {
 
 export type Order = {
     ids: string[]
+    username: string,
     _id: string;
     id: string,
     user: string,

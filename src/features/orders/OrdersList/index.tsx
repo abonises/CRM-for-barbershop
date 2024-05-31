@@ -4,8 +4,12 @@ import Order from "../Order";
 import {CustomError} from "../../../models/models.ts";
 import { RiStickyNoteAddLine } from "react-icons/ri";
 import {useNavigate} from "react-router-dom";
+import useAuth from "../../../hooks/useAuth"
 
 const Index = () => {
+
+    const { username, isManager, isAdmin } = useAuth()
+
     const {
         data: orders,
         isLoading,
@@ -33,11 +37,17 @@ const Index = () => {
     }
 
     if (isSuccess) {
-        const {ids} = orders
 
-        const listContent = ids?.length
-            ? ids.map(OrderId => <Order key={OrderId} OrderId={OrderId}/>)
-            : null
+        const { ids, entities } = orders
+
+        let filteredIds
+        if (isManager || isAdmin) {
+            filteredIds = [...ids]
+        } else {
+            filteredIds = ids.filter(orderId => entities[orderId].username === username)
+        }
+
+        const listContent = ids?.length && filteredIds.map(OrderId => <Order key={OrderId} OrderId={OrderId}/>)
 
         content = (<div className='orders-page'>
             <div className='header-box'>

@@ -15,11 +15,12 @@ export const authApiSlice = apiSlice.injectEndpoints({
                 url: '/auth/logout',
                 method: 'POST',
             }),
-            async onQueryStarted({ dispatch, queryFulfilled }) {
+            async onQueryStarted(_arg, { dispatch, _queryFulfilled }) {
                 try {
-                    const { data } = await queryFulfilled
-                    console.log(data)
+                    console.log(dispatch)
+
                     dispatch(logOut())
+                    console.log()
                     setTimeout(() => {
                         dispatch(apiSlice.util.resetApiState())
                     }, 1000)

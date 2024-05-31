@@ -1,3 +1,4 @@
+
 import {createSlice} from '@reduxjs/toolkit'
 import {RootState} from "../../app/store.ts";
 
@@ -20,5 +21,4 @@ export const {setCredentials, logOut} = authSlice.actions
 export default authSlice.reducer
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-expect-error
-export const selectCurrentToken = (state: RootState) => state.api.auth.token
+export const selectCurrentToken = (state: RootState) => state.auth.token

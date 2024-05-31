@@ -7,6 +7,7 @@ import {FaRegSave, FaTrashAlt} from "react-icons/fa";
 import cn from "classnames";
 import './index.scss'
 import moment from 'moment';
+import useAuth from "../../../hooks/useAuth"
 
 type Props = {
     order: Order,
@@ -16,7 +17,9 @@ type Props = {
 const PHONE_REGEX = /^380\d{9}$/;
 
 const Index = ({ order, users }: Props) => {
-
+    
+    const { isManager, isAdmin } = useAuth()
+    
     const [updateOrder, {
         isLoading,
         isSuccess,
@@ -100,6 +103,18 @@ const Index = ({ order, users }: Props) => {
         )
     })
 
+    let deleteButton = null
+    if(isManager || isAdmin) {
+        deleteButton = (
+            <button
+                className={'delete-button'}
+                title="Delete"
+                onClick={onDeleteOrderClicked}
+            ><FaTrashAlt/>
+            </button>
+        )
+    }
+
     const errClass = (isError || isDelError) ? "error" : ""
     const validNameClass = !name ? "form__error" : ''
     const validSurnameClass = !surname ? "form__error" : ''
@@ -126,12 +141,7 @@ const Index = ({ order, users }: Props) => {
                                     disabled={!canSave}
                             ><FaRegSave/>
                             </button>
-                            <button
-                                className={'delete-button'}
-                                title="Delete"
-                                onClick={onDeleteOrderClicked}
-                            ><FaTrashAlt/>
-                            </button>
+                            {deleteButton}
                         </div>
                     </div>
                     <div className="personal-data-box">
