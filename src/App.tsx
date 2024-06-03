@@ -22,10 +22,10 @@ function App() {
         <Route path='/' element={<Layout />} >
             <Route path="login" element={<Login />} />
 
+            <Route index element={<MainPage />}/>
             <Route element={<PersistLogin />}>
                 <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]}/>}>
                     <Route element={<Prefetch />}>
-                        <Route index element={<MainPage />}/>
 
                         <Route element={<RequireAuth allowedRoles={[ROLES.Manager, ROLES.Admin]}/>}>
                             <Route path="stuff">

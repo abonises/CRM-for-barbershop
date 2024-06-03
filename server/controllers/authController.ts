@@ -14,9 +14,6 @@ interface DecodedToken extends JwtPayload {
     UserInfo: Decoded;
 }
 
-// @desc Login
-// @route POST /auth
-// @access Public
 const login = async (req: Request, res: Response) => {
     const { username, password } = req.body
 
@@ -57,13 +54,9 @@ const login = async (req: Request, res: Response) => {
         maxAge: 7 * 24 * 60 * 60 * 1000
     })
 
-    // Send accessToken containing username and roles
     res.json({ accessToken })
 }
 
-// @desc Refresh
-// @route GET /auth/refresh
-// @access Public - because access token has expired
 const refresh = (req: Request, res: Response) => {
     const cookies = req.cookies
 
@@ -99,12 +92,9 @@ const refresh = (req: Request, res: Response) => {
     )
 }
 
-// @desc Logout
-// @route POST /auth/logout
-// @access Public - just to clear cookie if exists
 const logout = (req: Request, res: Response) => {
     const cookies = req.cookies
-    if (!cookies?.jwt) return res.sendStatus(204) //No content
+    if (!cookies?.jwt) return res.sendStatus(204)
     res.clearCookie('jwt', { httpOnly: true, sameSite: 'none' })
     res.json({ message: 'Cookie cleared' })
     console.log('cookie-cleared')
